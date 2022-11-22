@@ -39,7 +39,7 @@
 - Google-Sheets – Unity. 
 1.1 В облачном сервисе google console подключить API для работы с google
 sheets и google drive.
-![GoogleCloudAPI](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleCloudAPI.png)
+![GoogleCloudAPI](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleCloudPI.png)
 - Реализовать запись данных из скрипта на python в google-таблицу. Данные
 описывают изменение темпа инфляции на протяжении 11 отсчётных периодов, с
 учётом стоимости игрового объекта в каждый период.
