@@ -35,8 +35,7 @@
 
 
 ##Задание 1
-Реализовать совместную работу и передачу данных в связке Python
-- Google-Sheets – Unity. 
+Реализовать совместную работу и передачу данных в связке Python - Google-Sheets – Unity. 
 1.1 В облачном сервисе google console подключить API для работы с google
 sheets и google drive.
 ![GoogleCloudAPI](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleCloudAPI.png)
