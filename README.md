@@ -43,10 +43,36 @@ sheets и google drive.
 - Реализовать запись данных из скрипта на python в google-таблицу. Данные
 описывают изменение темпа инфляции на протяжении 11 отсчётных периодов, с
 учётом стоимости игрового объекта в каждый период.
+
+```py
+import gspread
+import numpy as np
+gc = gspread.service_account(filename='unitydatasciense-369010-9b3bc7dcdac1.json')
+sh = gc.open("UnitySheets")
+price = np.random.randint(2000, 10000, 11)
+mon = list(range(1,11))
+i = 0
+while i <= len(mon):
+    i += 1
+    if i == 0:
+        continue
+    else:
+        tempInf = ((price[i-1]-price[i-2])/price[i-2])*100
+        tempInf = str(tempInf)
+        tempInf = tempInf.replace('.',',')
+        sh.sheet1.update(('A' + str(i)), str(i))
+        sh.sheet1.update(('B' + str(i)), str(price[i-1]))
+        sh.sheet1.update(('C' + str(i)), str(tempInf))
+        print(tempInf)
+```
+![PyCharm](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/PyCharm.png)
+![GoogleSheets](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleSheets.png)
 - Создать новый проект на Unity, который будет получать данные из google-
 таблицы, в которую были записаны данные в предыдущем пункте.
 - Написать функционал на Unity, в котором будет воспризводиться аудио-
 файл в зависимости от значения данных из таблицы.
+![Unity](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/Unity.png)
+
 
 
 **BigDigital Team: Denisov | Fadeev | Panov**
