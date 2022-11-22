@@ -40,7 +40,7 @@
 1.1 В облачном сервисе google console подключить API для работы с google
 sheets и google drive.
 ![GoogleCloudAPI](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleCloudAPI.png)
-- Реализовать запись данных из скрипта на python в google-таблицу. Данные
+1.2 Реализовать запись данных из скрипта на python в google-таблицу. Данные
 описывают изменение темпа инфляции на протяжении 11 отсчётных периодов, с
 учётом стоимости игрового объекта в каждый период.
 
@@ -67,7 +67,7 @@ while i <= len(mon):
 ```
 ![PyCharm](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/PyCharm.png)
 ![GoogleSheets](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleSheets.png)
-- Создать новый проект на Unity, который будет получать данные из google-
+1.3 Создать новый проект на Unity, который будет получать данные из google-
 таблицы, в которую были записаны данные в предыдущем пункте. Скрипт-файл для получения данных из google-таблицы:
 ```cs
 using System.Collections;
@@ -160,7 +160,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
 }
 ```
-- Написать функционал на Unity, в котором будет воспризводиться аудио-
+1.4 Написать функционал на Unity, в котором будет воспризводиться аудио-
 файл в зависимости от значения данных из таблицы.
 ![Unity](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/Unity.png)
 
