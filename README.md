@@ -68,7 +68,98 @@ while i <= len(mon):
 ![PyCharm](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/PyCharm.png)
 ![GoogleSheets](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/GoogleSheets.png)
 - Создать новый проект на Unity, который будет получать данные из google-
-таблицы, в которую были записаны данные в предыдущем пункте.
+таблицы, в которую были записаны данные в предыдущем пункте. Скрипт-файл для получения данных из google-таблицы:
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using SimpleJSON;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    public AudioClip goodSpeak;
+    public AudioClip normalSpeak;
+    public AudioClip badSpeak;
+    private AudioSource selectAudio;
+    private Dictionary<string,float> dataSet = new Dictionary<string, float>();
+    private bool statusStart = false;
+    private int i = 1;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartCoroutine(GoogleSheets());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (dataSet["Mon_" + i.ToString()] <= 10 & statusStart == false & i != dataSet.Count)
+        {
+            StartCoroutine(PlaySelectAudioGood());
+            Debug.Log(dataSet["Mon_" + i.ToString()]);
+        }
+
+        if (dataSet["Mon_" + i.ToString()] > 10 & dataSet["Mon_" + i.ToString()] < 100 & statusStart == false & i != dataSet.Count)
+        {
+            StartCoroutine(PlaySelectAudioNormal());
+            Debug.Log(dataSet["Mon_" + i.ToString()]);
+        }
+
+        if (dataSet["Mon_" + i.ToString()] >= 100 & statusStart == false & i != dataSet.Count)
+        {
+            StartCoroutine(PlaySelectAudioBad());
+            Debug.Log(dataSet["Mon_" + i.ToString()]);
+        }
+    }
+
+    IEnumerator GoogleSheets()
+    {
+        UnityWebRequest curentResp = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/12G2OBBeTQXd8dijnD6G7iYt767Yfar4WsV6c6oI82Wk/values/Лист1?key=AIzaSyCukQnHp1EH7y1VrzEjDdANZacPHfUpWdc");
+        yield return curentResp.SendWebRequest();
+        string rawResp = curentResp.downloadHandler.text;
+        var rawJson = JSON.Parse(rawResp);
+        foreach (var itemRawJson in rawJson["values"])
+        {
+            var parseJson = JSON.Parse(itemRawJson.ToString());
+            var selectRow = parseJson[0].AsStringList;
+            dataSet.Add(("Mon_" + selectRow[0]), float.Parse(selectRow[2]));
+        }
+    }
+
+    IEnumerator PlaySelectAudioGood()
+    {
+        statusStart = true;
+        selectAudio = GetComponent<AudioSource>();
+        selectAudio.clip = goodSpeak;
+        selectAudio.Play();
+        yield return new WaitForSeconds(3);
+        statusStart = false;
+        i++;
+    }
+    IEnumerator PlaySelectAudioNormal()
+    {
+        statusStart = true;
+        selectAudio = GetComponent<AudioSource>();
+        selectAudio.clip = normalSpeak;
+        selectAudio.Play();
+        yield return new WaitForSeconds(3);
+        statusStart = false;
+        i++;
+    }
+    IEnumerator PlaySelectAudioBad()
+    {
+        statusStart = true;
+        selectAudio = GetComponent<AudioSource>();
+        selectAudio.clip = badSpeak;
+        selectAudio.Play();
+        yield return new WaitForSeconds(4);
+        statusStart = false;
+        i++;
+    }
+}
+```
 - Написать функционал на Unity, в котором будет воспризводиться аудио-
 файл в зависимости от значения данных из таблицы.
 ![Unity](https://github.com/Kokarse/Python_GoogleSheets_Unity/raw/main/Screenshots/Unity.png)
